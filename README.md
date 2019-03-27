@@ -11,9 +11,9 @@ Put Nuke Escape.dll under the release tab into sm_plugins folder.
 |   :---:                    |     :---:       |    :---:      |    :---:    |
 | ne_disable                 | Boolean         | False             | Disables or enables the entire plugin. |
 | ne_defaulttoggle           | Boolean         | False             | Set toggle to this value |
-| ne_broadcast               | Boolean         | True              | When round starts should the player be given information aboout the plugin. |
+| ne_broadcast               | Boolean         | True              | Should a player be given a broadcast message when they spawn |
 | ne_broadcastmessage        | String          | [See this page ](https://github.com/MrMith/Nuke-Escape/wiki/ne_broadcastmessage)| Information about the plugin that is shown in a mapwide broadcast. |
-| ne_nuketime                | Integer         | 30                | Time till the nuke turns on. Takes 100 seconds for nuke to explode (10 second announcement and 90 seconnd countdown) |
+| ne_nuketime                | Integer         | 30                | Time in seconds till the nuke turns on. Takes 100 seconds for nuke to explode (10 second announcement and 90 second countdown) |
 | ne_spawnprotect            | Integer         | 10                | How long till D-Class can murder eachother. |
 | ne_dclassitems             | Int List        | 11,13             | What items D-Class spawn with. |
 | ne_dclassammo              | Int List        | 0,0,36            | Sets ammo on spawn. 1st number = 5.56mm, 2nd number = 7.62mm, 3rd number = 9mm|
