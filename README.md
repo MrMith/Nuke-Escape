@@ -10,7 +10,7 @@ Put Nuke Escape.dll under the release tab into sm_plugins folder.
 | Config Option              | Value Type      | Default Value | Description |
 |   :---:                    |     :---:       |    :---:      |    :---:    |
 | ne_disable                 | Boolean         | False             | Disables or enables the entire plugin. |
-| ne_defaulttoggle           | Boolean         | False             | Set toggle to this value |
+| ne_defaulttoggle           | Boolean         | False             | Should this plugin be toggled on by default |
 | ne_broadcast               | Boolean         | True              | Should a player be given a broadcast message when they spawn |
 | ne_broadcastmessage        | String          | [See this page ](https://github.com/MrMith/Nuke-Escape/wiki/ne_broadcastmessage)| Information about the plugin that is shown in a mapwide broadcast. |
 | ne_nuketime                | Integer         | 30                | Time in seconds till the nuke turns on. Takes 100 seconds for nuke to explode after it is turned on. (10 second announcement and 90 second countdown) |
