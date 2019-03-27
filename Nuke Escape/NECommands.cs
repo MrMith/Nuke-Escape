@@ -151,6 +151,7 @@ namespace Nuke_Escape
 		{
 			NEHandler.NE_Config.NE_Active = false;
 			AlphaWarheadController.host.CancelDetonation();
+
 			return new string[] {NEHandler.plugin.Details.id + " has been disabled." };
 		}
 	}

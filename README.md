@@ -18,6 +18,7 @@ Put Nuke Escape.dll under the release tab into sm_plugins folder.
 | ne_dclassitems             | Int List        | 11,13             | What items D-Class spawn with. |
 | ne_dclassammo              | Int List        | 0,0,36            | Sets ammo on spawn. 1st number = 5.56mm, 2nd number = 7.62mm, 3rd number = 9mm|
 | ne_spawnqueue              | String          | 40444             | Decides the spawn queue. This is multipled so if you had a server size of 22 there would be 4 scps and 18 dclass. |
+| ne_latespawn               | Integer         | 15                | How long into the round people who join late will be spawned as D-Class. |
 
 ## Commands
 

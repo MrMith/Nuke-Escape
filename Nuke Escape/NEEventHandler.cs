@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Nuke_Escape
 {
-	class NEEventHandler : IEventHandlerRoundEnd, IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerPlayerJoin, IEventHandlerSummonVehicle, IEventHandlerDecideTeamRespawnQueue
+	internal class NEEventHandler : IEventHandlerRoundEnd, IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerPlayerJoin, IEventHandlerSummonVehicle, IEventHandlerDecideTeamRespawnQueue
 	{
 		public Plugin plugin;
 
@@ -53,6 +53,11 @@ namespace Nuke_Escape
 			if (NE_Config.NE_Active)
 			{
 				ev.Player.PersonalBroadcast(15, "Welcome to Nuke Escape!", true);
+
+				if(plugin.Server.Round.Duration > 0 && plugin.Server.Round.Duration <= NE_Config.NE_LateSpawn)
+				{
+					ev.Player.ChangeRole(Role.CLASSD);
+				}
 			}
 		}
 
