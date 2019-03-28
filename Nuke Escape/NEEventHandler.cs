@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Nuke_Escape
 {
-	internal class NEEventHandler : IEventHandlerRoundEnd, IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerPlayerJoin, IEventHandlerSummonVehicle, IEventHandlerDecideTeamRespawnQueue
+	class NEEventHandler : IEventHandlerRoundEnd, IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerPlayerJoin, IEventHandlerSummonVehicle, IEventHandlerDecideTeamRespawnQueue
 	{
 		public Plugin plugin;
 

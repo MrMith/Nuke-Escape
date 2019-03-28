@@ -63,9 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ForceStop.cs" />
+    <Compile Include="Commands\Version.cs" />
+    <Compile Include="Commands\Status.cs" />
+    <Compile Include="Commands\Toggle.cs" />
+    <Compile Include="Commands\Disable.cs" />
     <Compile Include="Manager\NE_Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NECommands.cs" />
     <Compile Include="NEEventHandler.cs" />
     <Compile Include="NEMain.cs" />
   </ItemGroup>
