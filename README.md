@@ -27,5 +27,5 @@ Put Nuke Escape.dll under the release tab into sm_plugins folder.
 | ne_version                 | N/A             | Get the version of this plugin           |
 | ne_disable                 | N/A             | Disables the entire plugin.              |
 | ne_status                  | N/A             | Gets the status of this plugin.          |
-| ne_toggle                  | N/A             | Toggles if its going to be active next round.  |
+| ne                         | String          | ne on turns the plugin on, ne off turns it off.  |
 | ne_forcestop               | N/A             | Forces the plugin to stop. Round will NOT end and everyone will be D-Class/SCP. |

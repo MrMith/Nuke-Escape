@@ -27,13 +27,27 @@ namespace Nuke_Escape.Commands
 
 		public string[] OnCall(ICommandSender sender, string[] args)
 		{
-			if (NEHandler.NE_Config.NE_Active)
+			if (NEHandler.NE_Config.NE_HasServerStarted)
 			{
-				return new string[] { $"{plugin.Details.id} is currently active! Will it be next round:{NEHandler.NE_Config.NE_Toggled}" };
+				if (NEHandler.NE_Config.NE_Toggled)
+				{
+					return new string[] { $"{plugin.Details.id} will be active next round! Currently active:{NEHandler.NE_Config.NE_Active}" };
+				}
+				else
+				{
+					return new string[] { $"{plugin.Details.id} will NOT be active next round! Currently active:{NEHandler.NE_Config.NE_Active}" };
+				}
 			}
 			else
 			{
-				return new string[] { $"{plugin.Details.id} is NOT currently active! Will it be next round:{NEHandler.NE_Config.NE_Toggled}" };
+				if (NEHandler.NE_Config.NE_Toggled)
+				{
+					return new string[] { $"{plugin.Details.id} will be active this round! Currently active:{NEHandler.NE_Config.NE_Active}" };
+				}
+				else
+				{
+					return new string[] { $"{plugin.Details.id} will NOT be active this round! Currently active:{NEHandler.NE_Config.NE_Active}" };
+				}
 			}
 		}
 	}

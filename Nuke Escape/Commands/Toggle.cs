@@ -22,19 +22,43 @@ namespace Nuke_Escape.Commands
 
 		public string GetUsage()
 		{
-			return "ne_toggle";
+			return "ne on | ne off";
 		}
 
 		public string[] OnCall(ICommandSender sender, string[] args)
 		{
-			NEHandler.NE_Config.NE_Toggled = !NEHandler.NE_Config.NE_Toggled;
+			if(args.Length < 1)
+			{
+				return new string[] {GetUsage()};
+			}
+
+			if(args[0].ToLower() == "on")
+			{
+				NEHandler.NE_Config.NE_Toggled = true;
+
+				if(!NEHandler.NE_Config.NE_HasServerStarted)
+				{
+					NEHandler.NE_Config.NE_Active = true;
+				}
+			}
+
+			if (args[0].ToLower() == "off")
+			{
+				NEHandler.NE_Config.NE_Toggled = false;
+
+				if (!NEHandler.NE_Config.NE_HasServerStarted)
+				{
+					NEHandler.NE_Config.NE_Active = false;
+				}
+			}
+
 			if (NEHandler.NE_Config.NE_Toggled)
 			{
-				return new string[] { $"{plugin.Details.id} will be active next round!" };
+				return new string[] { $"Turned {plugin.Details.id} on! Currently active {NEHandler.NE_Config.NE_Active}" };
 			}
 			else
 			{
-				return new string[] { $"{plugin.Details.id} will NOT be active next round!" };
+				return new string[] { $"Turned {plugin.Details.id} off! Currently active {NEHandler.NE_Config.NE_Active}" };
 			}
 		}
 	}
