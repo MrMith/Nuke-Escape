@@ -29,6 +29,7 @@
 
 			NE_InfiniteAmmo = plugin.GetConfigBool("ne_dclassinfammo");
 			NE_Broadcast = plugin.GetConfigBool("ne_broadcast");
+			NE_Toggled = plugin.GetConfigBool("ne_defaulttoggle");
 
 			NE_BroadcastMessage = plugin.GetConfigString("ne_broadcastmessage");
 			NE_BroadcastMessage = NE_BroadcastMessage.Replace("NUKETIME", NE_NukeTime.ToString());
@@ -37,11 +38,6 @@
 
 			NE_Active = false;
 			NE_NukeActive = false;
-
-			if (!NE_Toggled)
-			{
-				NE_Toggled = plugin.GetConfigBool("ne_defaulttoggle");
-			}
 		}
 	}
 }

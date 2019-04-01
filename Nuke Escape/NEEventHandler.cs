@@ -24,7 +24,7 @@ namespace Nuke_Escape
 		public void OnDecideTeamRespawnQueue(DecideRespawnQueueEvent ev)
 		{
 			string SpawnQueue = "";
-			for(int i = 0; i < plugin.Server.MaxPlayers/5;i++)
+			for(int i = 0; i < (plugin.Server.MaxPlayers+5)/5;i++) // The plus 5 here to hopefully handle admins joining when server is full.
 			{
 				SpawnQueue += NE_Config.NE_SpawnQueue;
 			}
@@ -39,11 +39,14 @@ namespace Nuke_Escape
 
 		public void OnPlayerHurt(PlayerHurtEvent ev)
 		{
-			if (ev?.Attacker?.TeamRole.Role == Role.CLASSD && ev.Player.TeamRole.Role == Role.CLASSD)
+			if(NE_Config.NE_Active)
 			{
-				if(plugin.Server.Round.Duration < NE_Config.NE_SpawnProtect)
+				if (ev?.Attacker?.TeamRole.Role == Role.CLASSD && ev.Player.TeamRole.Role == Role.CLASSD)
 				{
-					ev.Damage = 0;
+					if (plugin.Server.Round.Duration < NE_Config.NE_SpawnProtect)
+					{
+						ev.Damage = 0;
+					}
 				}
 			}
 		}
@@ -56,6 +59,10 @@ namespace Nuke_Escape
 
 				if(plugin.Server.Round.Duration > 0 && plugin.Server.Round.Duration <= NE_Config.NE_LateSpawn)
 				{
+					/*
+					int rem = plugin.Server.NumPlayers % 5;
+					int role = int.Parse(NE_Config.NE_SpawnQueue[rem + 1].ToString());
+					*/
 					ev.Player.ChangeRole(Role.CLASSD);
 				}
 			}
@@ -83,17 +90,13 @@ namespace Nuke_Escape
 
 		public void OnRoundStart(RoundStartEvent ev)
 		{
-			if(NE_Config.NE_Toggled)
-			{
-				NE_Config.NE_Active = true;
-			}
+			NE_Config.NE_Active = NE_Config.NE_Toggled;
 
 			if(NE_Config.NE_Active)
 			{
-				plugin.Server.Map.ClearBroadcasts();
-				plugin.Server.Map.Shake();
 				if(NE_Config.NE_Broadcast)
 				{
+					plugin.Server.Map.ClearBroadcasts();
 					plugin.Server.Map.Broadcast(30, NE_Config.NE_BroadcastMessage, true);
 				}
 				AlphaWarheadController.host.ScheduleDetonation(NE_Config.NE_NukeTime+1, true);
@@ -142,11 +145,8 @@ namespace Nuke_Escape
 
 			CheckFalseRoundEnd = true;
 			NE_Config.SetupConfig(plugin);
-			if(NE_Config.NE_Toggled)
-			{
-				NE_Config.NE_Active = true;
-			}
-			plugin.Info(NE_Config.NE_Active +":active:" + NE_Config.NE_Toggled+":toggled");
+
+			NE_Config.NE_Active = NE_Config.NE_Toggled;
 		}
 	}
 }

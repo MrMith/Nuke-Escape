@@ -20,7 +20,7 @@ namespace Nuke_Escape
 		name = "Nuke Escape",
 		description = "Everyone will spawn as either D class or an SCP, you are currently in a facility with some of the most well known SCP's, and 079 knows this as well.  He has currently taken control of the facility to release his fellow SCPs, as well as destroy the facility with the alpha warhead in order to damage the foundation. After waking up you find yourself with an old pistol and an all access key card to the facility, you find a post it note on the back of the card; scribbled onto it is a simple word, RUN.",
 		id = "Mith.NukeEscape",
-		version = "1.00",
+		version = "0.01",
 		SmodMajor = 3,
 		SmodMinor = 3,
 		SmodRevision = 0
@@ -50,7 +50,7 @@ namespace Nuke_Escape
 			AddCommand("ne_forcestop", new NEForceStop(this, NEHandler));
 
 			AddConfig(new Smod2.Config.ConfigSetting("ne_disable", false, Smod2.Config.SettingType.BOOL, true, $"Enables or disables {this.Details.name}."));
-			AddConfig(new Smod2.Config.ConfigSetting("ne_defaulttoggle", true, Smod2.Config.SettingType.BOOL, true, $"Should this gamemode be toggled on or off by default."));
+			AddConfig(new Smod2.Config.ConfigSetting("ne_defaulttoggle", false, Smod2.Config.SettingType.BOOL, true, $"Should this gamemode be toggled on or off by default."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_broadcast", true, Smod2.Config.SettingType.BOOL, true, $"Should player's be broadcasted to when the roundstarts."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_dclassinfammo", false, Smod2.Config.SettingType.BOOL, true, $"Should D-Class be given infinite ammo?"));
 
