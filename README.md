@@ -21,7 +21,7 @@ Put Nuke Escape.dll under the release tab into sm_plugins folder.
 | ne_latespawn               | Integer         | 15                | How long into the round people who join late will be spawned as D-Class. |
 | ne_dclassitems             | Int List        | 11,13             | What items D-Class spawn with. |
 | ne_dclassammo              | Int List        | 0,0,36            | Sets ammo of D-Class on spawn. 1st number = 5.56mm, 2nd number = 7.62mm, 3rd number = 9mm |
-| ne_nuketime                | Integer List    | 90                | Forces the nuke to be on at this time, if more then one number is present it will randomly select one. It takes 100 seconds for nuke to explode (10 seconds for announcement and 90 for the alarm phase) so at 190 seconds in the round for the default the nuke will explode |
+| ne_nuketime                | Integer List    | 90                | Forces the nuke to be on at this time, if more then one number is present it will randomly select one. It takes 100 seconds for nuke to explode (10 seconds for announcement and 90 for the alarm phase) so at 190 seconds in the round for the default config the nuke will explode |
 | ne_scpslatespawn           | Integer List    | 0,3,5,9,16,17     | SCP's to be randomly chosen from during the ne_latespawn time if they're chosen to be an SCP. |
 
 ## Commands
