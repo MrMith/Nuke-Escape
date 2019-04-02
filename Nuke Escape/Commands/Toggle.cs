@@ -22,7 +22,7 @@ namespace Nuke_Escape.Commands
 
 		public string GetUsage()
 		{
-			return "ne on | ne off";
+			return "ne on | ne off | ne status";
 		}
 
 		public string[] OnCall(ICommandSender sender, string[] args)
@@ -32,33 +32,36 @@ namespace Nuke_Escape.Commands
 				return new string[] {GetUsage()};
 			}
 
-			if(args[0].ToLower() == "on")
+			switch(args[0].ToLower())
 			{
-				NEHandler.NE_Config.NE_Toggled = true;
+				case "on":
+					NEHandler.NE_Config.NE_Toggled = true;
 
-				if(!NEHandler.NE_Config.NE_HasServerStarted)
-				{
-					NEHandler.NE_Config.NE_Active = true;
-				}
-			}
+					if (!NEHandler.NE_Config.NE_HasServerStarted)
+					{
+						NEHandler.NE_Config.NE_Active = true;
+					}
+					goto case "status";
+				case "off":
+					NEHandler.NE_Config.NE_Toggled = false;
 
-			if (args[0].ToLower() == "off")
-			{
-				NEHandler.NE_Config.NE_Toggled = false;
-
-				if (!NEHandler.NE_Config.NE_HasServerStarted)
-				{
-					NEHandler.NE_Config.NE_Active = false;
-				}
-			}
-
-			if (NEHandler.NE_Config.NE_Toggled)
-			{
-				return new string[] { $"Turned {plugin.Details.id} on! Currently active {NEHandler.NE_Config.NE_Active}" };
-			}
-			else
-			{
-				return new string[] { $"Turned {plugin.Details.id} off! Currently active {NEHandler.NE_Config.NE_Active}" };
+					if (!NEHandler.NE_Config.NE_HasServerStarted)
+					{
+						NEHandler.NE_Config.NE_Active = false;
+					}
+					plugin.Server.Map.ClearBroadcasts();
+					goto case "status";
+				case "status":
+					if (NEHandler.NE_Config.NE_Toggled)
+					{
+						return new string[] { $"Turned {plugin.Details.id} on! Currently active {NEHandler.NE_Config.NE_Active}" };
+					}
+					else
+					{
+						return new string[] { $"Turned {plugin.Details.id} off! Currently active {NEHandler.NE_Config.NE_Active}" };
+					}
+				default:
+					return new string[] { GetUsage() };
 			}
 		}
 	}
