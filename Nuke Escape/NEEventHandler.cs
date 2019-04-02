@@ -5,6 +5,7 @@ using Smod2.EventHandlers;
 using Smod2.EventSystem.Events;
 using System.Collections.Generic;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using Nuke_Escape.Manager;
 
@@ -25,20 +26,27 @@ namespace Nuke_Escape
 
 		public void OnDecideTeamRespawnQueue(DecideRespawnQueueEvent ev)
 		{
-			string SpawnQueue = "";
+			StringBuilder SpawnQueue = new StringBuilder("");
 
 			for(int i = 0; i < plugin.Server.MaxPlayers/5;i++)
 			{
-				SpawnQueue += NE_Config.NE_SpawnQueue;
+				SpawnQueue.Append(NE_Config.NE_SpawnQueue);
 			}
 
-			char[] spawnCharArray = SpawnQueue.ToCharArray();
+			char[] spawnCharArray = SpawnQueue.ToString().ToCharArray();
 
 			List<Smod2.API.Team> spawnqueueTeam = new List<Smod2.API.Team>();
 
 			for (int i = 0; i <= spawnCharArray.Length-1;i++)
 			{
-				spawnqueueTeam.Add((Smod2.API.Team)int.Parse(spawnCharArray[i].ToString()));
+				if(int.TryParse(spawnCharArray[i].ToString(),out int TeamToAdd))
+				{
+					spawnqueueTeam.Add((Smod2.API.Team)TeamToAdd);
+				}
+				else
+				{
+					plugin.Error("ne_spawnqueue is not set correctly, WHAT DID YOU DO?");
+				}
 			}
 
 			ev.Teams = spawnqueueTeam.ToArray();
@@ -74,14 +82,20 @@ namespace Nuke_Escape
 				if(plugin.Server.Round.Duration > 0 && plugin.Server.Round.Duration <= NE_Config.NE_LateSpawn)
 				{
 					int rem = plugin.Server.NumPlayers % 5;
-					int role = int.Parse(NE_Config.NE_SpawnQueue[rem + 1].ToString());
-					if(role == 0)
+					if(int.TryParse(NE_Config.NE_SpawnQueue[rem + 1].ToString(), out int role))
 					{
-						MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(), GetRandomSCP());
+						if (role == 0)
+						{
+							MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(), GetRandomSCP());
 
-						return;
+							return;
+						}
+						MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(), Role.CLASSD);
 					}
-					MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(), Role.CLASSD);
+					else
+					{
+						plugin.Error("ne_spawnqueue is not set correctly, WHAT DID YOU DO?");
+					}
 				}
 			}
 		}
@@ -91,7 +105,6 @@ namespace Nuke_Escape
 			await Task.Delay(250);
 			ServerMod2.API.SmodPlayer playa = new ServerMod2.API.SmodPlayer(gameObject);
 			playa.ChangeRole(role);
-			return;
 		}
 
 
