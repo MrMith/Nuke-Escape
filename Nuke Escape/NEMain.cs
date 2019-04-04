@@ -20,7 +20,7 @@ namespace Nuke_Escape
 		name = "Nuke Escape",
 		description = "Everyone will spawn as either D class or an SCP, you are currently in a facility with some of the most well known SCP's, and 079 knows this as well.  He has currently taken control of the facility to release his fellow SCPs, as well as destroy the facility with the alpha warhead in order to damage the foundation. After waking up you find yourself with an old pistol and an all access key card to the facility, you find a post it note on the back of the card; scribbled onto it is a simple word, RUN.",
 		id = "Mith.NukeEscape",
-		version = "0.0.3",
+		version = "0.0.4",
 		SmodMajor = 3,
 		SmodMinor = 3,
 		SmodRevision = 0

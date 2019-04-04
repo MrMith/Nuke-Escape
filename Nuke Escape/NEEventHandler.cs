@@ -26,30 +26,33 @@ namespace Nuke_Escape
 
 		public void OnDecideTeamRespawnQueue(DecideRespawnQueueEvent ev)
 		{
-			StringBuilder SpawnQueue = new StringBuilder("");
-
-			for(int i = 0; i < plugin.Server.MaxPlayers/5;i++)
+			if(NE_Config.NE_Active)
 			{
-				SpawnQueue.Append(NE_Config.NE_SpawnQueue);
-			}
+				StringBuilder SpawnQueue = new StringBuilder("");
 
-			char[] spawnCharArray = SpawnQueue.ToString().ToCharArray();
-
-			List<Smod2.API.Team> spawnqueueTeam = new List<Smod2.API.Team>();
-
-			for (int i = 0; i <= spawnCharArray.Length-1;i++)
-			{
-				if(int.TryParse(spawnCharArray[i].ToString(),out int TeamToAdd))
+				for (int i = 0; i < plugin.Server.MaxPlayers / 5; i++)
 				{
-					spawnqueueTeam.Add((Smod2.API.Team)TeamToAdd);
+					SpawnQueue.Append(NE_Config.NE_SpawnQueue);
 				}
-				else
-				{
-					plugin.Error("ne_spawnqueue is not set correctly, WHAT DID YOU DO?");
-				}
-			}
 
-			ev.Teams = spawnqueueTeam.ToArray();
+				char[] spawnCharArray = SpawnQueue.ToString().ToCharArray();
+
+				List<Smod2.API.Team> spawnqueueTeam = new List<Smod2.API.Team>();
+
+				for (int i = 0; i <= spawnCharArray.Length - 1; i++)
+				{
+					if (int.TryParse(spawnCharArray[i].ToString(), out int TeamToAdd))
+					{
+						spawnqueueTeam.Add((Smod2.API.Team)TeamToAdd);
+					}
+					else
+					{
+						plugin.Error("ne_spawnqueue is not set correctly, WHAT DID YOU DO?");
+					}
+				}
+
+				ev.Teams = spawnqueueTeam.ToArray();
+			}
 		}
 
 		public void OnPlayerHurt(PlayerHurtEvent ev)
