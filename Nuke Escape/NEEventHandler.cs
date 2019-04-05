@@ -198,7 +198,7 @@ namespace Nuke_Escape
 		{
 			if (plugin.GetConfigBool("ne_disable"))
 			{
-				plugin.pluginManager.DisablePlugin(plugin);
+				plugin.PluginManager.DisablePlugin(plugin);
 				return;
 			}
 
