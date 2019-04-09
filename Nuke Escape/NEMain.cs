@@ -47,7 +47,6 @@ namespace Nuke_Escape
 
 			
 			AddConfig(new Smod2.Config.ConfigSetting("ne_disable", false, true, $"Enables or disables {Details.name}."));
-			AddConfig(new Smod2.Config.ConfigSetting("ne_defaulttoggle", false, true, "Should this gamemode be toggled on or off by default."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_broadcast", true, true, "Should player's be broadcasted to when the roundstarts."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_dclassinfammo", false, true, "Should D-Class be given infinite ammo?"));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_nukeshow", true, true, "Should a message be broadcasted when the nuke starts?"));
