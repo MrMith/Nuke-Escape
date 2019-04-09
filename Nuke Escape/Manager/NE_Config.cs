@@ -15,17 +15,14 @@ namespace Nuke_Escape.Manager
 		public int NE_NukeTime { get; private set; }
 		public int NE_LateSpawn { get; private set; }
 
-		public bool NE_Active { get; set; }
 		public bool NE_InfiniteAmmo { get; set; }
 		public bool NE_NukeActive { get; set; }
 		public bool NE_NukeShouldMessage { get; set; }
-		public bool NE_Toggled { get; set; }
 		public bool NE_Broadcast { get; set; }
 		public bool NE_HasServerStarted { get; set; }
 
 		public string NE_BroadcastMessage { get; set; }
 		public string NE_NukeMessage { get; set; }
-		public string NE_SpawnQueue { get; set; }
 		public string NE_WelcomeMessage { get; set; }
 
 		public void SetupConfig(Smod2.Plugin plugin)
@@ -47,17 +44,10 @@ namespace Nuke_Escape.Manager
 			NE_BroadcastMessage = NE_BroadcastMessage.Replace("NUKETIME", NE_NukeTime.ToString());
 			NE_BroadcastMessage = NE_BroadcastMessage.Replace("SPAWNPROTECT", NE_SpawnProtect.ToString());
 			NE_NukeMessage = plugin.GetConfigString("ne_nukemessage");
-			NE_SpawnQueue = plugin.GetConfigString("ne_spawnqueue");
 			NE_WelcomeMessage = plugin.GetConfigString("ne_welcomemessage");
-			
-			NE_Active = false;
+
 			NE_NukeActive = false;
 			NE_HasServerStarted = false;
-
-			if (!NE_Toggled)
-			{
-				NE_Toggled = plugin.GetConfigBool("ne_defaulttoggle");
-			}
 		}
 	}
 }

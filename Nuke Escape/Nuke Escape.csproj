@@ -38,6 +38,10 @@
       <HintPath>..\..\..\..\steamcmd\steamapps\common\SCP Secret Laboratory\SCPSL_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="GamemodeManager">
+      <HintPath>.\GamemodeManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Smod2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\steamcmd\steamapps\common\SCP Secret Laboratory\SCPSL_Data\Managed\Smod2.dll</HintPath>
@@ -67,10 +71,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ForceStop.cs" />
-    <Compile Include="Commands\Version.cs" />
-    <Compile Include="Commands\Toggle.cs" />
     <Compile Include="Commands\Disable.cs" />
+    <Compile Include="Commands\Version.cs" />
     <Compile Include="Manager\NE_Config.cs" />
     <Compile Include="NEEventHandler.cs" />
     <Compile Include="NEMain.cs" />
