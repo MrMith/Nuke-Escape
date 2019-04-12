@@ -3,14 +3,11 @@ using Smod2.API;
 using Smod2.Events;
 using Smod2.EventHandlers;
 using Smod2.EventSystem.Events;
-using System.Collections.Generic;
-using System;
-using System.Threading.Tasks;
 using Nuke_Escape.Manager;
 
 namespace Nuke_Escape
 {
-	class NEEventHandler : IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerPlayerJoin, IEventHandlerSummonVehicle, IEventHandlerWarheadStartCountdown, IEventHandlerSetSCPConfig
+	class NEEventHandler : IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerSummonVehicle, IEventHandlerWarheadStartCountdown, IEventHandlerSetSCPConfig
 	{
 		public Plugin plugin;
 
@@ -25,58 +22,13 @@ namespace Nuke_Escape
 		{
 			if (GamemodeManager.GamemodeManager.GetCurrentMode().Equals(plugin))
 			{
-				if (ev?.Attacker?.TeamRole.Role == Role.CLASSD && ev.Player.TeamRole.Role == Role.CLASSD)
+				if (ev.Attacker?.TeamRole.Role == Role.CLASSD && ev.Player.TeamRole.Role == Role.CLASSD)
 				{
 					if (plugin.Server.Round.Duration < NE_Config.NE_SpawnProtect)
 					{
 						ev.Damage = 0;
 					}
 				}
-			}
-		}
-
-		public void OnPlayerJoin(PlayerJoinEvent ev)
-		{
-			if (GamemodeManager.GamemodeManager.GetCurrentMode().Equals(plugin))
-			{
-				if (!NE_Config.NE_HasServerStarted)
-				{
-					ev.Player.PersonalBroadcast(40, NE_Config.NE_WelcomeMessage, true);
-				}
-				else if(NE_Config.NE_Broadcast)
-				{
-					ev.Player.PersonalBroadcast(30, NE_Config.NE_BroadcastMessage, true);
-				}
-
-				if(plugin.Server.Round.Duration > 0 && plugin.Server.Round.Duration <= NE_Config.NE_LateSpawn)
-				{
-					if (plugin.Server.NumPlayers >= GamemodeManager.GamemodeManager.SpawnQueue.Count)
-					{
-						MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(), Role.CLASSD);
-					}
-					else
-					{
-						if(GamemodeManager.GamemodeManager.CurrentQueue[plugin.Server.NumPlayers] == Smod2.API.Team.SCP)
-						{
-							MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(),GetRandomSCP());
-						}
-						else
-						{
-							MakeSurePlayerSpawnIn((UnityEngine.GameObject)ev.Player.GetGameObject(), Role.CLASSD);
-						}
-					}
-				}
-			}
-		}
-
-		public async void MakeSurePlayerSpawnIn(UnityEngine.GameObject gameObject, Role role)
-		{
-			await Task.Delay(250);
-			ServerMod2.API.SmodPlayer playa = new ServerMod2.API.SmodPlayer(gameObject);
-			playa.ChangeRole(role);
-			if(role == Role.CLASSD)
-			{
-				gameObject.GetComponent<WeaponManager>().NetworkfriendlyFire = true;
 			}
 		}
 
@@ -100,11 +52,11 @@ namespace Nuke_Escape
 				}
 				AlphaWarheadController.host.ScheduleDetonation(NE_Config.NE_NukeTime+1, true);// + 1 because if its 0 then it won't do anything :(
 
-				foreach(Smod2.API.Player playa in plugin.Server.GetPlayers())
+				foreach(Smod2.API.Player player in plugin.Server.GetPlayers())
 				{
-					if(playa.TeamRole.Team != Smod2.API.Team.SCP)
+					if(player.TeamRole.Team != Smod2.API.Team.SCP)
 					{
-						((UnityEngine.GameObject)playa.GetGameObject()).GetComponent<WeaponManager>().NetworkfriendlyFire = true;
+						((UnityEngine.GameObject)player.GetGameObject()).GetComponent<WeaponManager>().NetworkfriendlyFire = true;
 					}
 				}
 			}
@@ -112,7 +64,7 @@ namespace Nuke_Escape
 
 		public void OnSetRole(PlayerSetRoleEvent ev)
 		{
-			if(ev.Player.TeamRole.Role == Smod2.API.Role.CLASSD &&GamemodeManager.GamemodeManager.GetCurrentMode().Equals(plugin))
+			if(ev.Player.TeamRole.Role == Smod2.API.Role.CLASSD && GamemodeManager.GamemodeManager.GetCurrentMode().Equals(plugin))
 			{
 				ev.Items.Clear();
 				foreach(var item in NE_Config.NE_DClassitems)
@@ -161,40 +113,6 @@ namespace Nuke_Escape
 				return;
 			}
 			NE_Config.SetupConfig(plugin);
-		}
-
-		public Role GetRandomSCP()
-		{
-			Random rand = new Random();
-
-			Dictionary<Role, int> CheckTeams = new Dictionary<Role, int>();
-
-			foreach(var role in (Role[])Enum.GetValues(typeof(Role)))
-			{
-				CheckTeams[role] = 0;
-			}
-
-			foreach(Player playa in plugin.Server.GetPlayers())
-			{
-				CheckTeams[playa.TeamRole.Role]++;
-			}
-
-			int SCPToRandom;
-			int alive = 0;
-			for (;;)
-			{
-				SCPToRandom = NE_Config.NE_SCPsToRandom[rand.Next(0, NE_Config.NE_SCPsToRandom.Length - 1)];
-
-				foreach (var role in (Role[])Enum.GetValues(typeof(Role)))
-				{
-					if (CheckTeams[(Role)SCPToRandom] == alive && (Role)SCPToRandom == role)
-					{
-						return (Role)SCPToRandom;
-					}
-				}
-
-				alive++;
-			}
 		}
 
 		public void OnSetSCPConfig(SetSCPConfigEvent ev)

@@ -9,11 +9,9 @@ namespace Nuke_Escape.Manager
 		public int[] NE_DClassitems { get; private set; }
 		public int[] NE_DClassammo { get; private set; }
 		public int[] NE_NukeStartTimes { get; private set; }
-		public int[] NE_SCPsToRandom { get; private set; }
 
 		public int NE_SpawnProtect { get; private set; }
 		public int NE_NukeTime { get; private set; }
-		public int NE_LateSpawn { get; private set; }
 
 		public bool NE_InfiniteAmmo { get; set; }
 		public bool NE_NukeActive { get; set; }
@@ -30,12 +28,10 @@ namespace Nuke_Escape.Manager
 			NE_DClassitems = plugin.GetConfigIntList("ne_dclassitems");
 			NE_DClassammo = plugin.GetConfigIntList("ne_dclassammo");
 			NE_NukeStartTimes = plugin.GetConfigIntList("ne_nuketime");
-			NE_SCPsToRandom = plugin.GetConfigIntList("ne_scpslatespawn");
 
 			NE_SpawnProtect = plugin.GetConfigInt("ne_spawnprotect");
 			NE_NukeTime = NE_NukeStartTimes[rand.Next(0, NE_NukeStartTimes.Length - 1)];
-			NE_LateSpawn = plugin.GetConfigInt("ne_latespawn");
-
+			
 			NE_InfiniteAmmo = plugin.GetConfigBool("ne_dclassinfammo");
 			NE_Broadcast = plugin.GetConfigBool("ne_broadcast");
 			NE_NukeShouldMessage = plugin.GetConfigBool("ne_nukeshow");

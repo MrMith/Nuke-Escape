@@ -20,7 +20,7 @@ namespace Nuke_Escape
 		name = "Nuke Escape",
 		description = "Everyone will spawn as either D class or an SCP, you are currently in a facility with some of the most well known SCP's, and 079 knows this as well.  He has currently taken control of the facility to release his fellow SCPs, as well as destroy the facility with the alpha warhead in order to damage the foundation. After waking up you find yourself with an old pistol and an all access key card to the facility, you find a post it note on the back of the card; scribbled onto it is a simple word, RUN.",
 		id = "Mith.gamemode.NukeEscape",
-		version = "0.0.6",
+		version = "1.0.0",
 		SmodMajor = 3,
 		SmodMinor = 4,
 		SmodRevision = 0
@@ -55,13 +55,11 @@ namespace Nuke_Escape
 			AddConfig(new Smod2.Config.ConfigSetting("ne_nukemessage", "079 has forced to nuke to be on! You CANNOT turn it off! RUN!", true, "The message player's are shown when the nuke starts."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_welcomemessage", "Welcome to Nuke-Escape!", true, "The message player's are shown before the round starts."));
 			
-			AddConfig(new Smod2.Config.ConfigSetting("ne_latespawn", 20, true, "How long in seconds into the round people who join late will be spawned in."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_spawnprotect", 10, true, "Time till d-class can murder eachother."));
 
 			AddConfig(new Smod2.Config.ConfigSetting("ne_dclassitems", new int[] { 11,13 }, true, "What items D-Class get when they're spawned in."));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_dclassammo", new int[] { 0, 0, 36 }, true, "Sets ammo of D-Class on spawn. 1st number = 5.56mm, 2nd number = 7.62mm, 3rd number = 9mm"));
 			AddConfig(new Smod2.Config.ConfigSetting("ne_nuketime", new int[] { 90 }, true, "Forces the nuke to be on at this time, if more then one number is present it will randomly select one. It takes 100 seconds for nuke to explode (10 seconds for announcement and 90 for the alarm phase) so at 190 seconds in the round for the default the nuke will explode"));
-			AddConfig(new Smod2.Config.ConfigSetting("ne_scpslatespawn", new int[] { 0,3,5,9,16,17 }, true, "SCP's to be randomly chosen from during the ne_latespawn time if they're chosen to be an SCP."));
 
 			GamemodeManager.GamemodeManager.RegisterMode(this,"40444404444044440444");
 		}
