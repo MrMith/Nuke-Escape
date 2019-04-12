@@ -7,7 +7,7 @@ using Nuke_Escape.Manager;
 
 namespace Nuke_Escape
 {
-	class NEEventHandler : IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerSummonVehicle, IEventHandlerWarheadStartCountdown, IEventHandlerSetSCPConfig
+	class NEEventHandler : IEventHandlerRoundStart , IEventHandlerSetRole, IEventHandlerWaitingForPlayers, IEventHandlerPlayerHurt, IEventHandlerWarheadStopCountdown, IEventHandlerReload, IEventHandlerSummonVehicle, IEventHandlerWarheadStartCountdown, IEventHandlerSetSCPConfig, IEventHandlerPlayerJoin
 	{
 		public Plugin plugin;
 
@@ -126,6 +126,14 @@ namespace Nuke_Escape
 				ev.Ban173 = false;
 				ev.Ban939_53 = false;
 				ev.Ban939_89 = false;
+			}
+		}
+
+		public void OnPlayerJoin(PlayerJoinEvent ev)
+		{
+			if (GamemodeManager.GamemodeManager.GetCurrentMode().Equals(plugin) && !NE_Config.NE_HasServerStarted)
+			{
+				ev.Player.PersonalBroadcast(30,NE_Config.NE_WelcomeMessage,true);
 			}
 		}
 	}
